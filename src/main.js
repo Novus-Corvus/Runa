@@ -1,18 +1,29 @@
 const { invoke } = window.__TAURI__.core;
+const { open } = window.__TAURI__.dialog;
 
-let greetInputEl;
-let greetMsgEl;
-
-async function greet() {
-  // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-  greetMsgEl.textContent = await invoke("greet", { name: greetInputEl.value });
+async function get_folder() {
+  const file = await open({
+    multiple: false,
+    directory: true,
+  });
+  return file;
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-  greetInputEl = document.querySelector("#greet-input");
-  greetMsgEl = document.querySelector("#greet-msg");
-  document.querySelector("#greet-form").addEventListener("submit", (e) => {
-    e.preventDefault();
-    greet();
-  });
-});
+async function create_workspace(input_field) {
+  const workspace_creation_directory = input_field.value;
+  // ...
+}
+
+const workspaces_locate_btn = document.getElementById("local-workspaces__locate");
+const workspaces_name_input = document.getElementById("local-workspaces__name");
+const workspaces_done_btn   = document.getElementById("local-workspaces__done");
+workspaces_locate_btn.addEventListener("click", async (event) => {
+  event.preventDefault();
+  const workspace_directory = await get_folder();
+  workspaces_name_input.value = workspace_directory;
+})
+
+workspaces_done_btn.addEventListener("click", async (event) => {
+  event.preventDefault();
+  await create_workspace(workspaces_name_input);
+})

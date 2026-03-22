@@ -10,19 +10,21 @@
 }
 
 main {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
     height: 100vh;
     padding: 0;
 }
 
 #starting-screen__modal {
     width: 50vw;
-    height: 100vh;
+    height: 100%;
     max-width: 425px;
     min-width: 375px;
     display: flex;
     flex-direction: column;
-    margin: auto;
-    /* overflow: hidden; */
+    /* margin: 0 auto; */
     gap: 1rem;
     text-align: center;
     box-sizing: border-box;
@@ -42,6 +44,7 @@ main {
     height: 100%;
     align-self: center;
     padding: 1rem;
+    gap: 1rem;
     border-radius: 1rem;
     box-sizing: border-box;
     display: flex;
@@ -64,11 +67,37 @@ main {
     }
 }
 
-#local-workspaces__add {
+#local-workspaces__create {
+    display: flex;
+    background-color: var(--background);
+    border-radius: 1rem;
+    width: 100%;
+}
+
+#local-workspaces__name {
+    display: flex;
+    background-color: var(--background);
+    border: 0;
+    width: 100%;
+    text-align: center;
+    color: var(--text);
+    outline: 0;
+}
+
+#local-workspaces__locate {
+    display: flex;
     background-color: var(--accent);
     box-sizing: border-box;
-    padding: 0.5rem 0;
-    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    align-items: center;
+}
+
+#local-workspaces__done {
+    display: flex;
+    background-color: var(--accent);
+    box-sizing: border-box;
+    padding: 1rem;
     border-radius: 1rem;
     align-items: center;
 }
