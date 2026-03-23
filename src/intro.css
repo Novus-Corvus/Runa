@@ -58,12 +58,6 @@ main {
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
-
-        & a {
-            padding: 1rem;
-            border-radius: 0.25rem;
-            background-color: var(--layer2);
-        }
     }
 }
 
@@ -100,4 +94,39 @@ main {
     padding: 1rem;
     border-radius: 1rem;
     align-items: center;
+}
+
+#workspace-entry {
+    display: flex;
+    background-color: var(--layer2);
+    border-radius: 1rem;
+    padding: 1rem;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+
+    &:hover {
+        background-color: var(--background);
+    }
+
+    & p {
+        display: flex;
+        overflow-wrap: anywhere;
+        width: 90%;
+        padding: 0 1rem;
+        box-sizing: border-box;
+        border-right: 1px solid var(--layer3);
+    }
+
+    & img {
+        max-width: 2rem;
+        display: flex;
+        width: 10%;
+        padding: 8px;
+
+        &:hover {
+            scale: 1.25;
+            transform: rotate(25deg);
+        }
+    }
 }
