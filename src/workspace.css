@@ -121,10 +121,33 @@ main {
 
 .editor-toolbar {
     border: none;
+    padding: 8px;
+    /* background-color: var(--layer1); */
 
     & button {
         color: var(--text);
+        height: 24px;
+
+        &:hover {
+            background-color: var(--layer3);
+        }
+
+        &:active {
+            background-color: var(--background);
+        }
     }
+
+    & button.active {
+        background: var(--accent);
+    }
+}
+
+.editor-toolbar.fullscreen {
+    background: var(--layer1);
+}
+
+.EasyMDEContainer .CodeMirror-fullscreen {
+    background-color: var(--background);
 }
 
 .editor-preview {

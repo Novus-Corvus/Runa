@@ -59,8 +59,6 @@ async function renderWorkspaceTree(node) {
         }
         last_selected_entry = label;
         label.id = "selected-element";
-        
-        await loadNote(node.path);
     });
 
     if (node.is_dir && node.children) {
@@ -84,6 +82,10 @@ async function renderWorkspaceTree(node) {
         }
 
         entry.appendChild(childrenContainer);
+    } else {
+        label.addEventListener("click", async (event) => {
+            await loadNote(node.path);
+        });
     }
 
     return entry;

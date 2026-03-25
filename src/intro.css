@@ -110,6 +110,7 @@ main {
     }
 
     & p {
+        user-select: none;
         display: flex;
         overflow-wrap: anywhere;
         width: 90%;
