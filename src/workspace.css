@@ -92,22 +92,83 @@ main {
     border-radius: 1rem;
 }
 
-.explorer-list__entry {
-    font-size: 1rem;
-    background-color: var(--layer2);
-    border-radius: 0.25rem;
-    padding: 0.5rem;
-    margin-bottom: 0.25rem;
-
-    &:hover {
-        background-color: var(--background);
-    }
+#workspace-panel__right-editor {
+    display: flex;
+    width: 100%;
+    height: 100%;
 }
 
-.explorer-list__entry:hover ~ .explorer-list__folder {
+.EasyMDEContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.CodeMirror-scroll {
+    height: 100vh;
+}
+
+.CodeMirror {
+    color: var(--text);
     background-color: var(--background);
 }
 
-.explorer-list__folder {
+.EasyMDEContainer .CodeMirror {
+    border: none;
+    color: var(--text);
+}
+
+.editor-toolbar {
+    border: none;
+
+    & button {
+        color: var(--text);
+    }
+}
+
+.editor-preview {
+    background-color: var(--background);
+}
+
+.explorer-list__folder-container {
+    /* user-select: none; */
+    /* background-color: var(--background); */
+    /* padding: 0.5rem; */
+    /* margin-bottom: 0.25rem; */
+    /* border: 1px dashed red; */
+    box-sizing: border-box;
+
+    & p {
+        user-select: none;
+        padding: 0.5rem;
+        margin-bottom: 0.25rem;
+        background-color: var(--layer2);
+        border-radius: 0.25rem;
+
+        &:hover {
+            background-color: var(--layer3);
+        }
+    }
+}
+
+.explorer-list__folder-container p:hover ~ .explorer-list__folder-contents {
+    transition: all 0s;
+    border-left: 1px solid var(--layer3);
+}
+
+.explorer-list__entry:hover ~ .explorer-list__folder-contents {
+    background-color: var(--background);
+}
+
+.explorer-list__folder-contents {
     padding-left: 1rem;
+}
+
+#selected-element {
+    background-color: var(--accent);
+}
+
+#collapsed-directory {
+    display: none;
 }
