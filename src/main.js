@@ -98,7 +98,8 @@ async function createWorkspace(input_field) {
 }
 
 async function enterWorkspace(workspace_path) {
-
+  console.log(workspace_path);
+  window.location.href = `/workspace.html?path=${workspace_path}`;
 }
 
 async function buildWorkspaceEntry(manifest_content, workspace_path) {
@@ -119,9 +120,7 @@ async function buildWorkspaceEntry(manifest_content, workspace_path) {
   div.appendChild(img);
   div.addEventListener("click", async (event) => {
     event.preventDefault();
-    console.log(workspace_path);
-    // ... functionality to enter workspace page
-    // window.location.href = "/workspace.html?path=...";
+    await enterWorkspace(workspace_path);
   });
   return div;
 }
