@@ -13,6 +13,8 @@ body {
     display: flex;
     height: 100vh;
     width: 100vw;
+
+    overflow: hidden;
 }
 
 main {
@@ -82,6 +84,10 @@ main {
     flex-direction: column;
     padding: 0.5rem 0.5rem;
     box-sizing: border-box;
+
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--layer3) var(--layer1);
 }
 
 #workspace-panel__right {
@@ -122,7 +128,6 @@ main {
 .editor-toolbar {
     border: none;
     padding: 8px;
-    /* background-color: var(--layer1); */
 
     & button {
         color: var(--text);
@@ -155,11 +160,6 @@ main {
 }
 
 .explorer-list__folder-container {
-    /* user-select: none; */
-    /* background-color: var(--background); */
-    /* padding: 0.5rem; */
-    /* margin-bottom: 0.25rem; */
-    /* border: 1px dashed red; */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -175,6 +175,10 @@ main {
         flex-direction: row-reverse;
         justify-content: start;
         align-items: center;
+
+        & img {
+            width: 1rem;
+        }
 
         &:hover {
             background-color: var(--layer3);
@@ -205,4 +209,57 @@ main {
 
 #collapsed-directory {
     display: none;
+}
+
+#notification-container {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.notification {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: #1e1e1e;
+    border-left: 3px solid var(--notification-color);
+    color: #ccc;
+    font-size: 0.85rem;
+    min-width: 220px;
+    max-width: 320px;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateX(1rem);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.notification--visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.notification__icon {
+    color: var(--notification-color);
+    flex-shrink: 0;
+}
+
+.notification__message {
+    flex: 1;
+}
+
+.notification__progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--notification-color);
+    opacity: 0.5;
 }
