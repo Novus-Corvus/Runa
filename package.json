@@ -12,6 +12,7 @@
   "dependencies": {
     "@tauri-apps/plugin-dialog": "^2.6.0",
     "@tauri-apps/plugin-fs": "^2.4.5",
-    "easymde": "^2.20.0"
+    "easymde": "^2.20.0",
+    "path": "^0.12.7"
   }
 }
