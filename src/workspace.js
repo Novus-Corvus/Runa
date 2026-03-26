@@ -110,14 +110,37 @@ async function deleteEntryFolder() {
 
 async function createEntryFile() {
     const name = prompt("Name the new file ...");
-    const fullPath = await join(workspace_path, name);
+    let fullPath = await join(workspace_path, name);
+
+    if (last_selected_path) {
+        const parts = last_selected_path.split(/[/\\]/);
+
+        const check_type = await checkEntry(last_selected_path);
+        if (check_type == "file") {
+            parts.pop();
+        }
+
+        parts.push(name);
+
+        fullPath = parts.join("/");
+    }
+
     const file = await create(fullPath);
     await file.close();
 }
 
 async function createEntryFolder() {
     const name = prompt("Name the new folder ...");
-    const fullPath = await join(workspace_path, name);
+    let fullPath = await join(workspace_path, name);
+
+    if (last_selected_path) {
+        const parts = last_selected_path.split(/[/\\]/);
+
+        parts.push(name);
+
+        fullPath = parts.join("/");
+    }
+
     await mkdir(fullPath);
 }
 
@@ -125,9 +148,13 @@ async function renderWorkspaceTree(node) {
     const entry = document.createElement("div");
 
     const label = document.createElement("p");
+    const label_icon = document.createElement("img");
     label.textContent = node.name;
+    label.appendChild(label_icon);
     entry.className = "explorer-list__entry";
     entry.appendChild(label);
+
+    label_icon.src = 'assets/svg/file-text.svg';
 
     label.addEventListener("click", async (event) => {
         event.preventDefault();
@@ -141,6 +168,7 @@ async function renderWorkspaceTree(node) {
 
     if (node.is_dir && node.children) {
         entry.className = "explorer-list__folder-container"
+        label_icon.src = 'assets/svg/folder.svg';
 
         const childrenContainer = document.createElement("div");
         childrenContainer.className = "explorer-list__folder-contents";
