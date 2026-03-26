@@ -1,6 +1,6 @@
 const { invoke } = window.__TAURI__.core;
 const { open } = window.__TAURI__.dialog;
-const { exists, BaseDirectory, mkdir, writeTextFile, readTextFile } = window.__TAURI__.fs;
+const { exists, BaseDirectory, mkdir, writeTextFile, readTextFile, create } = window.__TAURI__.fs;
 const { join } = window.__TAURI__.path;
 
 // --- manifest templates
@@ -89,14 +89,6 @@ async function getWorkspaceManifest(filepath) {
   }
 }
 
-async function createWorkspace(input_field) {
-  // Creates a new workspace in a directory
-  if (input_field.value === ""){return};
-  const workspace_creation_directory = input_field.value;
-  await addManifestPath(input_field.value);
-  // ...
-}
-
 async function enterWorkspace(workspace_path) {
   console.log(workspace_path);
   window.location.href = `/workspace.html?path=${workspace_path}`;
@@ -140,6 +132,29 @@ async function buildWorkspacesList() {
     // create workspace elements ...
     const workspace_entry = await buildWorkspaceEntry(manifest_content, workspaces_list[i]);
     parent_element.appendChild(workspace_entry);
+  }
+}
+
+async function createWorkspace(input_field) {
+  // Creates a new workspace in a directory
+  if (input_field.value === ""){return};
+  const workspace_creation_directory = input_field.value;
+  if (await exists(workspace_creation_directory)) {
+    try {
+      const workspace_creation_path = await join(workspace_creation_directory, "manifest.runa");
+      const file = await create(workspace_creation_path);
+      await file.close();
+      await writeTextFile(workspace_creation_path, manifest_template_local);
+    }
+    catch {
+      console.log(`failed writing new manifest to ${workspace_creation_directory}`);
+    }
+    finally {
+      await addManifestPath(workspace_creation_directory);
+      await buildWorkspacesList();
+    }
+  } else {
+    console.log(`failed finding the selected directory ${workspace_creation_directory}`);
   }
 }
 
