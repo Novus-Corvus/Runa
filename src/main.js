@@ -122,6 +122,7 @@ async function buildWorkspacesList() {
   const manifest_json = await getWorkspacesManifest();
   const workspaces_list = manifest_json["workspaces"];
   const parent_element = document.getElementById("local-workspaces__nav");
+  parent_element.innerHTML = "";
 
   for (let i = 0; i < workspaces_list.length; i++) {
     // get each workspace
