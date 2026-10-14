@@ -1,0 +1,25 @@
+[workspace]
+resolver = "2"
+members = ["crates/runa-core", "crates/runa-theme"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.75"
+license = "GPL-3.0-only"
+repository = "https://github.com/Novus-Corvus/Runa"
+
+# The "nothing may panic" rule, enforced by the compiler instead of by hope.
+# Test code is exempt (see the cfg_attr in each crate's lib.rs).
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+
+[workspace.lints.clippy]
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+indexing_slicing = "deny"
+unreachable = "deny"
+todo = "deny"
+unimplemented = "deny"

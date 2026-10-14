@@ -1,0 +1,13 @@
+[package]
+name = "runa-core"
+description = "Vault, notes, links and safe file I/O for Runa. No UI code."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
